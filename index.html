@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script src="https://unpkg.com/vue@3.0.5"></script>
+</head>
+<body>
+  <h1>Hello Vue 3</h1>
+  <div id="root">
+    <div v-if="showBooks">
+      <p>{{ title }} - {{ author }} - {{ age }}</p>
+    </div>
+    <div v-else>
+      <p>No Data</p>
+    </div>
+    <button v-on:click="age++">Increase age</button>
+    <button v-on:click="age--">Decrease age</button>
+
+    <button @click="showBooks = !showBooks">Toggle</button>
+
+    <div @click="changeTitle('This is the arg')">
+      Change title
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
