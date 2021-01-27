@@ -4,10 +4,28 @@
   <meta charset="UTF-8">
   <title>Title</title>
   <script src="https://unpkg.com/vue@3.0.5"></script>
+
+  <style>
+    img {
+      width: 100px;
+    }
+    .box {
+      padding: 100px 0;
+      width: 400px;
+      text-align: center;
+      background: #ddd;
+      margin: 20px;
+      display: inline-block;
+    }
+    .favorite {
+      font-weight: bold;
+    }
+  </style>
 </head>
 <body>
   <h1>Hello Vue 3</h1>
   <div id="root">
+    <a v-bind:href="url">best website ever</a>
     <div v-if="showBooks">
       <p>{{ title }} - {{ author }} - {{ age }}</p>
     </div>
@@ -17,10 +35,31 @@
     <button v-on:click="age++">Increase age</button>
     <button v-on:click="age--">Decrease age</button>
 
-    <button @click="showBooks = !showBooks">Toggle</button>
+    <button @click="toggleShowBooks">Toggle</button>
 
     <div @click="changeTitle('This is the arg')">
       Change title
+    </div>
+
+<!--    mouse events-->
+    <div class="box" @mouseover="handleEvent($event, 12)">mouseover (enter)</div>
+    <div class="box" @mouseleave="handleEvent">mouseleave</div>
+    <div class="box" @dblclick="handleEvent">double click</div>
+    <div class="box" @mousemove="handleMousemove">position - {{ x }} {{ y }}</div>
+
+    <div class="booksList">
+      <ul>
+        <li v-for="book in filterBooks" :class="{ favorite: book.isFav}" @click="toggleFavoriteBooks(book)">
+          <img :src="book.img" :alt="book.title">
+          {{ book.title}} - {{ book.author }}
+        </li>
+      </ul>
+<!--      <p>{{ books[0].title }} - {{ books[0].author }}</p>-->
+<!--      <p>{{ books[1].title }} - {{ books[1].author }}</p>-->
+<!--      <p>{{ books[2].title }} - {{ books[2].author }}</p>-->
+<!--      <p>{{ books[3].title }} - {{ books[3].author }}</p>-->
+<!--      <p>{{ books[4].title }} - {{ books[4].author }}</p>-->
+<!--      <p>{{ books[5].title }} - {{ books[5].author }}</p>-->
     </div>
   </div>
 
