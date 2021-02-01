@@ -11,7 +11,7 @@
 
 <script>
 export default {
-  props: ['theme'],
+  props: ['theme', 'close'],
   data() {
 
   },

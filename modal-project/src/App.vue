@@ -3,7 +3,7 @@
   <!--  <label for="name">Name Input:</label>-->
   <!--  <input type="text" name="name" id="name" ref="name">-->
   <!--  <button @click="handleClick">Click me!</button>-->
-  <div v-if="showModal">
+  <teleport to=".modal__teleport" v-if="showModal">
     <Modal theme="" @close="toggleModal">
       <h1>Ninja Giveaway!</h1>
       <p>Grab your ninja swag for half price!</p>
@@ -12,8 +12,19 @@
         <a href="#">more info</a>
       </template>
     </Modal>
+  </teleport>
+  <div v-if="showModalTwo">
+    <Modal @close="toggleModalTwo">
+      <h1>My second Modal</h1>
+      <p>This is the paragraph for the second modal</p>
+      <template v-slot:links>
+        <a href="#">This is the link</a>
+        <a href="#">This is the another link</a>
+      </template>
+    </Modal>
   </div>
   <button @click.shift="toggleModal">Open Modal (shift)</button>
+  <button @click.shift="toggleModalTwo">Open Second Modal (shift)</button>
 </template>
 
 <script>
@@ -29,7 +40,8 @@ export default {
       title: 'My first Vue App :)',
       header: 'Sign up for the Giveaway!',
       text: 'Grab your ninja swag for half price!',
-      showModal: false
+      showModal: false,
+      showModalTwo: false
     }
   },
   methods: {
@@ -40,13 +52,16 @@ export default {
     },
     toggleModal() {
       this.showModal = !this.showModal
+    },
+    toggleModalTwo() {
+      this.showModalTwo = !this.showModalTwo
     }
   }
 }
 </script>
 
 <style>
-#app {
+#app, .modal {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
